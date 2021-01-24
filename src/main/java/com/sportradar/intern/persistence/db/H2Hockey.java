@@ -43,10 +43,13 @@ public class H2Hockey implements DataEventAccess {
             );
 
             ResultSet rs = stmt.executeQuery();
-            Team[] teams = new Team[2];
-            teams[0] = new Team(rs.getString(2));
+            LocalDateTime dateTime;
+
             while (rs.next()) {
-                events.add(new Event(LocalDateTime.parse(rs.getString(1), formatter), teams));
+                Team[] teams = new Team[2];
+                dateTime  = LocalDateTime.parse(rs.getString(1), formatter);
+                teams[0] = new Team(rs.getString(2));
+                events.add(new Event(dateTime, teams));
             }
             stmt.close();
             conn.close();
