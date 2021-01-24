@@ -1,0 +1,53 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous">
+
+<style>
+    th {
+        color: black;
+        background-color: hsl(240, 50%, 50%);
+    }
+</style>
+
+<table class="table table-striped">
+    <tr class="bg-info">
+        <th>Datum</th>
+        <th>Team</th>
+
+    </tr>
+
+    <tbody id="eventTable">
+
+    </tbody>
+</table>
+
+<script>
+
+    var dataExchange = []
+
+    $.ajax({
+        method: 'GET',
+        url: 'http://localhost:8080/api/calendar',
+        success: function (response) {
+            dataExchange = response
+            buildTable(dataExchange)
+            console.log(dataExchange)
+        }
+    })
+
+
+    function buildTable(data) {
+        var table = document.getElementById('eventTable')
+
+        for (var i = 0; i < data.length; i++) {
+
+            var row = `<tr>
+             				<td>${data[i].dateOfEvent}</td>
+             				<td>${data[i].team[0].teamName}</td>
+             		  </tr>`
+            table.innerHTML += row
+        }
+    }
+</script>
