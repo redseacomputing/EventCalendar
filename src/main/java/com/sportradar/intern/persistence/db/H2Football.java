@@ -1,4 +1,4 @@
-package com.sportradar.intern.persistence;
+package com.sportradar.intern.persistence.db;
 
 import com.sportradar.intern.dto.Event;
 import com.sportradar.intern.dto.Team;

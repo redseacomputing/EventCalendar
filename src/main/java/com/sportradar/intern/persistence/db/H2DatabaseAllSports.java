@@ -1,4 +1,4 @@
-package com.sportradar.intern.persistence;
+package com.sportradar.intern.persistence.db;
 
 import com.sportradar.intern.dto.Event;
 import com.sportradar.intern.dto.Team;
@@ -9,15 +9,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class H2Hockey {
-
+public class H2DatabaseAllSports {
     List<Event> events;
 
-    public List<Event> getEvents() {
-        return events;
-    }
-
-    public void hockeyH2Events() {
+    public void allH2Events() {
 
         final String JDBC_DRIVER = "org.h2.Driver";
         final String DB_URL = "jdbc:h2:./resources/testRadar";
@@ -35,20 +30,23 @@ public class H2Hockey {
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
             stmt = conn.prepareStatement(
-                    "SELECT DISTINCT e.DateTime as Datum, t.Name as Mannschaft\n" +
+                    "SELECT DISTINCT e.DateTime, t.Name, c.Name\n" +
                             "                    FROM Events e\n" +
                             "                    JOIN EventTeam et ON et._EventID = e.EventID\n" +
                             "                    JOIN Teams t ON t.TeamID = et._TeamID\n" +
-                            "                    JOIN CATEGORIES C on t._CategoryID = C.CategoryID\n" +
-                            "                    WHERE C.Name LIKE 'Hockey'\n" +
+                            "                    JOIN CATEGORIES c on t._CategoryID = c.CategoryID\n" +
                             "                    ORDER BY e.DateTime;"
             );
 
             ResultSet rs = stmt.executeQuery();
-            Team[] teams = new Team[2];
-            teams[0] = new Team(rs.getString(2));
+            LocalDateTime dateTime;
+            String category;
             while (rs.next()) {
-                events.add(new Event(LocalDateTime.parse(rs.getString(1), formatter), teams));
+                Team[] teams = new Team[2];
+                dateTime  = LocalDateTime.parse(rs.getString(1), formatter);
+                teams[0] = new Team(rs.getString(2));
+                category = rs.getString(3);
+                events.add(new Event(dateTime,teams,category));
             }
             stmt.close();
             conn.close();
@@ -59,5 +57,9 @@ public class H2Hockey {
             System.err.println("Error during SQL query");
             e.printStackTrace();
         }
+    }
+
+    public List<Event> getEvents() {
+        return events;
     }
 }
