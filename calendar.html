@@ -25,10 +25,6 @@
         <a class="nav-item nav-link" href="hockey.html">Hockey</a>
     </div>
 
-    <div>
-        <li><a href="https://www.sportradar.com">Sportradar</a></li>
-        <li><a href="https://developer.sportradar.com/">Web API</a></li>
-    </div>
 
 </nav>
 
@@ -54,6 +50,10 @@
     </tbody>
 </table>
 
+    <div class="nav bottomNav">
+        <a class="nav-item nav-link" href="https://www.sportradar.com">Sportradar</a>
+        <a class="nav-item nav-link" href="https://developer.sportradar.com/">Web API</a>
+    </div>
 
 <script>
 
@@ -83,7 +83,7 @@
         }
     }
 
-     // TODO: Search function does not work properly, key events should receive console.log
+     // TODO: Search filter does not work properly, key events should receive console.log
     $('search-input').on('keyup', function () {
         var value = $(this).val()
         console.log('Value:', value)
