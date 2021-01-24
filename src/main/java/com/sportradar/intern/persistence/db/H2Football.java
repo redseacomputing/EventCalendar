@@ -33,20 +33,23 @@ public class H2Football implements DataEventAccess {
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
             stmt = conn.prepareStatement(
-                    "SELECT DISTINCT e.DateTime as Datum, t.Name as Mannschaft\n" +
+                    "SELECT e.DateTime, t.Name" +
                             "                    FROM Events e\n" +
                             "                    JOIN EventTeam et ON et._EventID = e.EventID\n" +
                             "                    JOIN Teams t ON t.TeamID = et._TeamID\n" +
-                            "                    JOIN CATEGORIES C on t._CategoryID = C.CategoryID\n" +
-                            "                    WHERE C.Name LIKE 'Soccer'\n" +
+                            "                    JOIN Categories c on t._CategoryID = c.CategoryID\n" +
+                            "                    WHERE c.Name LIKE 'Soccer'\n" +
                             "                    ORDER BY e.DateTime;"
             );
 
             ResultSet rs = stmt.executeQuery();
-            Team[] teams = new Team[26];
-            teams[0] = new Team(rs.getString(2));
+            LocalDateTime dateTime;
+
             while (rs.next()) {
-                events.add(new Event(LocalDateTime.parse(rs.getString(1), formatter), teams));
+                Team[] teams = new Team[2];
+                dateTime  = LocalDateTime.parse(rs.getString(1), formatter);
+                teams[0] = new Team(rs.getString(2));
+                events.add(new Event(dateTime, teams));
             }
             stmt.close();
             conn.close();
