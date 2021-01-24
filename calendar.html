@@ -14,7 +14,7 @@
 </style>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">All sports</a>
+    <a class="navbar-brand" href="calendar.html">All sports</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
             aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -68,6 +68,7 @@
         }
     })
 
+    // FIXME: Get team elements from one event and show it in one table row-->http://localhost:8080/api/calendar
     function buildTable(data) {
         var table = document.getElementById('eventTable')
 
@@ -82,7 +83,7 @@
         }
     }
 
-    // TODO: Search function does not work properly, key events should receive console.log
+     // TODO: Search function does not work properly, key events should receive console.log
     $('search-input').on('keyup', function () {
         var value = $(this).val()
         console.log('Value:', value)
