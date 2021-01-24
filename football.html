@@ -1,0 +1,105 @@
+<html>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous">
+
+<style>
+    th {
+        color: black;
+        background-color: hsl(240, 50%, 50%);
+    }
+</style>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="calendar.html">All sports</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="navbar-nav">
+        <a class="nav-item nav-link" href="football.html">Soccer</a>
+        <a class="nav-item nav-link" href="hockey.html">Hockey</a>
+    </div>
+
+    <div>
+        <li><a href="https://www.sportradar.com">Sportradar</a></li>
+        <li><a href="https://developer.sportradar.com/">Web API</a></li>
+    </div>
+
+</nav>
+
+<div class="row">
+    <div class="col">
+        <div class="card card-body">
+            <input id="search-input" class="form-control" type="search">
+        </div>
+    </div>
+</div>
+
+<table class="table table-striped">
+    <tr class="bg-info">
+        <th>Datum</th>
+        <th>Team</th>
+        <!--        <th>Team</th>-->
+
+    </tr>
+
+    <tbody id="eventTable">
+
+    </tbody>
+</table>
+
+
+<script>
+
+    var dataExchange = []
+
+    $.ajax({
+        method: 'GET',
+        url: 'http://localhost:8080/api/calendar/football',
+        success: function (response) {
+            dataExchange = response
+            buildTable(dataExchange)
+        }
+    })
+
+    function buildTable(data) {
+        var table = document.getElementById('eventTable')
+
+        for (var i = 0; i < data.length; i++) {
+
+            var row = `<tr>
+             				<td>${data[i].dateOfEvent}</td>
+             				<td>${data[i].team[0].teamName}</td>
+             		  </tr>`
+            table.innerHTML += row
+        }
+    }
+
+    // TODO: Search function does not work properly, key events should receive console.log
+    $('search-input').on('keyup', function () {
+        var value = $(this).val()
+        console.log('Value:', value)
+        var data = searchTable(value, dataExchange)
+        buildTable(data)
+    })
+
+    function searchTable(value, data) {
+        var filteredData = []
+
+        for (var i = 0; i < data.length; i++) {
+            value = value.toLowerCase()
+            var name = data[i].name.toLowerCase()
+
+            if (name.includes(value)) {
+                filteredData.push(data[i])
+            }
+        }
+        return filteredData
+    }
+</script>
+</html>
