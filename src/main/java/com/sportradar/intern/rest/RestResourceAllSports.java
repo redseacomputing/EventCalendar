@@ -1,7 +1,7 @@
 package com.sportradar.intern.rest;
 
 import com.sportradar.intern.dto.Event;
-import com.sportradar.intern.persistence.H2DatabaseAllSports;
+import com.sportradar.intern.persistence.db.H2DatabaseAllSports;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -16,7 +16,7 @@ public class RestResourceAllSports {
     @Produces(MediaType.APPLICATION_JSON)
     public List<Event> all() {
         databaseController = new H2DatabaseAllSports();
-        databaseController.allH2Events();
+        databaseController.getAllEvents();
         return databaseController.getEvents();
     }
 }
