@@ -1,7 +1,7 @@
 package com.sportradar.intern.rest;
 
 import com.sportradar.intern.dto.Event;
-import com.sportradar.intern.persistence.H2Football;
+import com.sportradar.intern.persistence.db.H2Football;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -18,7 +18,7 @@ public class RestFootball {
     @Produces(MediaType.APPLICATION_JSON)
     public List<Event> all() {
         soccerDatabaseController = new H2Football();
-        soccerDatabaseController.soccerH2Events();
+        soccerDatabaseController.getAllEvents();
         return soccerDatabaseController.getEvents();
     }
 }
