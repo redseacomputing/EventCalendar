@@ -2,6 +2,7 @@ package com.sportradar.intern.persistence.db;
 
 import com.sportradar.intern.dto.Event;
 import com.sportradar.intern.dto.Team;
+import com.sportradar.intern.persistence.DataEventAccess;
 
 import java.sql.*;
 import java.time.LocalDateTime;
@@ -9,15 +10,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class H2Hockey {
+public class H2Hockey implements DataEventAccess {
 
     List<Event> events;
 
-    public List<Event> getEvents() {
-        return events;
-    }
-
-    public void hockeyH2Events() {
+    @Override
+    public void getAllEvents() {
 
         final String JDBC_DRIVER = "org.h2.Driver";
         final String DB_URL = "jdbc:h2:./resources/testRadar";
@@ -59,5 +57,9 @@ public class H2Hockey {
             System.err.println("Error during SQL query");
             e.printStackTrace();
         }
+    }
+
+    public List<Event> getEvents() {
+        return events;
     }
 }
