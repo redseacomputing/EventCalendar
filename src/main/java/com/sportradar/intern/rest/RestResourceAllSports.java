@@ -1,7 +1,7 @@
 package com.sportradar.intern.rest;
 
 import com.sportradar.intern.dto.Event;
-import com.sportradar.intern.persistence.db.H2DatabaseAllSports;
+import com.sportradar.intern.service.AllSportsService;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -10,13 +10,12 @@ import java.util.List;
 @Path("calendar")
 public class RestResourceAllSports {
 
-    H2DatabaseAllSports databaseController;
+    AllSportsService service;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Event> all() {
-        databaseController = new H2DatabaseAllSports();
-        databaseController.getAllEvents();
-        return databaseController.getEvents();
+        service = new AllSportsService();
+        return service.getAllEvents();
     }
 }
