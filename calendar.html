@@ -41,7 +41,7 @@
         <th>Datum</th>
         <th>Kategorie</th>
         <th>Team</th>
-        <!--        <th>Team</th>-->
+        <th>Team</th>
 
     </tr>
 
@@ -68,7 +68,7 @@
         }
     })
 
-    // TODO: Get team elements from one event and show it in one table row-->http://localhost:8080/api/calendar
+    // TODO: Get more than two teams and show it in one table row e.g. racing-->http://localhost:8080/api/calendar
     function buildTable(data) {
         var table = document.getElementById('eventTable')
 
@@ -77,7 +77,8 @@
             var row = `<tr>
              				<td>${data[i].dateOfEvent}</td>
              				<td>${data[i].category}</td>
-             				<td>${data[i].team[0].teamName}</td>
+             				<td>${data[i].teams[0].teamName}</td>
+             				<td>${data[i].teams[1].teamName}</td>
              		  </tr>`
             table.innerHTML += row
         }
