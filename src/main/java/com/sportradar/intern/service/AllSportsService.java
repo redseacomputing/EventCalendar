@@ -19,13 +19,12 @@ public class AllSportsService {
         List<Event> simpleEvents = db.fetchAll();
         for (int i = 0; i < simpleEvents.size(); i++) {
             List<Team> teamsOfEvent = db.fetchTeamNamesFrom(simpleEvents.get(i).getId());
-            //Team team = teamsOfEvent.get(0);
-            //fetch category of team from database
-           // List<String> category = db.fetchCategoryFrom(team.getTeamName());
+            String teamName = teamsOfEvent.get(0).getTeamName();
+            List<String> category = db.fetchCategoryFrom(teamName);
             Event event = new Event();
             event.setId(simpleEvents.get(i).getId());
             event.setDateOfEvent(simpleEvents.get(i).getDateOfEvent());
-            //event.setCategory(category.get(0));
+            event.setCategory(category.get(0));
             event.setTeams(teamsOfEvent);
             events.add(event);
         }

@@ -165,6 +165,7 @@ public class H2DatabaseAllSports implements DataEventAccess {
             stmt.setString(1, teamName);
             ResultSet rs = stmt.executeQuery();
             String category;
+            categories= new ArrayList<>();
             while (rs.next()) {
                 category = rs.getString(1);
                 categories.add(category);
