@@ -1,13 +1,21 @@
 package com.sportradar.intern.dto;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class Event {
+    private int id;
     private LocalDateTime dateOfEvent;
-    private Team[] team;
     private String category;
+    private Team[] team;
+    private List<Team> teams;
 
     public Event() {
+    }
+
+    public Event(int id, LocalDateTime dateOfEvent) {
+        this.id = id;
+        this.dateOfEvent = dateOfEvent;
     }
 
     public Event(LocalDateTime dateOfEvent, Team[] team) {
@@ -19,6 +27,22 @@ public class Event {
         this.dateOfEvent = dateOfEvent;
         this.team = team;
         this.category = category;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public List<Team> getTeams() {
+        return teams;
+    }
+
+    public void setTeams(List<Team> teams) {
+        this.teams = teams;
     }
 
     public String getCategory() {
