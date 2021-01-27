@@ -2,6 +2,7 @@ package com.sportradar.intern.rest;
 
 import com.sportradar.intern.dto.Event;
 import com.sportradar.intern.persistence.db.H2Hockey;
+import com.sportradar.intern.service.HockeyService;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -12,13 +13,12 @@ import java.util.List;
 @Path("calendar/hockey")
 public class RestHockey {
 
-    H2Hockey hockeyDatabaseController;
+    HockeyService hockeyService;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Event> all() {
-        hockeyDatabaseController = new H2Hockey();
-        hockeyDatabaseController.getAllEvents();
-        return hockeyDatabaseController.getEvents();
+        hockeyService = new HockeyService();
+        return hockeyService.getAllEvents();
     }
 }
