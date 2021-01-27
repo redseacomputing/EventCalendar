@@ -64,7 +64,7 @@ public class H2Event {
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
             stmt = conn.prepareStatement(
-                    "SELECT e.DateTime, e.EventID" +
+                    "SELECT DISTINCT e.DateTime, e.EventID" +
                             "                    FROM Events e\n" +
                             "                    JOIN EventTeam et ON et._EventID = e.EventID\n" +
                             "                    JOIN Teams t ON t.TeamID = et._TeamID\n" +
