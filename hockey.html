@@ -40,7 +40,7 @@
     <tr class="bg-info">
         <th>Datum</th>
         <th>Team</th>
-        <!--        <th>Team</th>-->
+        <th>Team</th>
 
     </tr>
 
@@ -75,7 +75,8 @@
 
             var row = `<tr>
              				<td>${data[i].dateOfEvent}</td>
-             				<td>${data[i].team[0].teamName}</td>
+             				<td>${data[i].teams[0].teamName}</td>
+             				<td>${data[i].teams[1].teamName}</td>
              		  </tr>`
             table.innerHTML += row
         }
