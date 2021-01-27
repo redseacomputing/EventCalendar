@@ -1,6 +1,6 @@
 package com.sportradar.intern.rest;
 
-import com.sportradar.intern.dto.Event;
+import com.sportradar.intern.dto.DTOEvent;
 import com.sportradar.intern.service.HockeyService;
 
 import javax.ws.rs.GET;
@@ -16,7 +16,7 @@ public class RestHockey {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Event> all() {
+    public List<DTOEvent> all() {
         hockeyService = new HockeyService();
         return hockeyService.getAllEvents();
     }

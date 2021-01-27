@@ -1,7 +1,7 @@
 package com.sportradar.intern.service;
 
-import com.sportradar.intern.dto.Event;
-import com.sportradar.intern.dto.Team;
+import com.sportradar.intern.dto.DTOEvent;
+import com.sportradar.intern.dto.DTOTeam;
 import com.sportradar.intern.persistence.db.H2Event;
 import com.sportradar.intern.persistence.db.H2Team;
 
@@ -13,25 +13,25 @@ public class FootballService {
 
     H2Event eventController;
     H2Team teamController;
-    List<Event> events;
-    List<Event> result;
+    List<DTOEvent> DTOEvents;
+    List<DTOEvent> result;
 
 
-    public List<Event> getAllEvents(){
+    public List<DTOEvent> getAllEvents(){
         eventController = new H2Event();
         teamController = new H2Team();
-        events = new ArrayList<>();
-        List<Event> simpleEvents = eventController.fetchAllFromCategory("Soccer");
-        for (int i = 0; i < simpleEvents.size(); i++) {
-            List<Team> teamsOfEvent = teamController.fetchTeamNamesFrom(simpleEvents.get(i).getId());
-            Event event = new Event();
-            event.setId(simpleEvents.get(i).getId());
-            event.setDateOfEvent(simpleEvents.get(i).getDateOfEvent());
-            event.setTeams(teamsOfEvent);
-            events.add(event);
+        DTOEvents = new ArrayList<>();
+        List<DTOEvent> simpleDTOEvents = eventController.fetchAllFromCategory("Soccer");
+        for (int i = 0; i < simpleDTOEvents.size(); i++) {
+            List<DTOTeam> teamsOfEvent = teamController.fetchTeamNamesFrom(simpleDTOEvents.get(i).getId());
+            DTOEvent DTOEvent = new DTOEvent();
+            DTOEvent.setId(simpleDTOEvents.get(i).getId());
+            DTOEvent.setDateOfEvent(simpleDTOEvents.get(i).getDateOfEvent());
+            DTOEvent.setTeams(teamsOfEvent);
+            DTOEvents.add(DTOEvent);
         }
         result = new ArrayList<>(
-                new HashSet<>(events));
+                new HashSet<>(DTOEvents));
         return result;
     }
 }

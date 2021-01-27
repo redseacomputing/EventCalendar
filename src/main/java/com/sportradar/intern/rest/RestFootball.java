@@ -1,6 +1,6 @@
 package com.sportradar.intern.rest;
 
-import com.sportradar.intern.dto.Event;
+import com.sportradar.intern.dto.DTOEvent;
 import com.sportradar.intern.service.FootballService;
 
 import javax.ws.rs.GET;
@@ -16,7 +16,7 @@ public class RestFootball {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Event> all() {
+    public List<DTOEvent> all() {
         footballService = new FootballService();
         return footballService.getAllEvents();
     }

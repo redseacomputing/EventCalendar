@@ -1,8 +1,6 @@
 package com.sportradar.intern.persistence.db;
 
-import com.sportradar.intern.dto.Event;
-import com.sportradar.intern.dto.Team;
-import com.sportradar.intern.persistence.DataEventAccess;
+import com.sportradar.intern.dto.DTOEvent;
 
 import java.sql.*;
 import java.time.LocalDateTime;
@@ -12,7 +10,7 @@ import java.util.List;
 
 public class H2Event {
 
-    public List<Event> fetchAll() {
+    public List<DTOEvent> fetchAll() {
         final String JDBC_DRIVER = "org.h2.Driver";
         final String DB_URL = "jdbc:h2:./resources/testRadar";
 
@@ -21,7 +19,7 @@ public class H2Event {
         Connection conn = null;
         PreparedStatement stmt = null;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        List<Event> allEvents = new ArrayList<>();
+        List<DTOEvent> allDTOEvents = new ArrayList<>();
         try {
             Class.forName(JDBC_DRIVER);
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
@@ -33,7 +31,7 @@ public class H2Event {
             LocalDateTime dateTime;
             while (rs.next()) {
                 dateTime = LocalDateTime.parse(rs.getString(1), formatter);
-                allEvents.add(new Event(Integer.valueOf(rs.getString(2)), dateTime));
+                allDTOEvents.add(new DTOEvent(Integer.valueOf(rs.getString(2)), dateTime));
             }
             stmt.close();
             conn.close();
@@ -44,10 +42,10 @@ public class H2Event {
             System.err.println("Error during SQL query");
             e.printStackTrace();
         }
-        return allEvents;
+        return allDTOEvents;
     }
 
-    public List<Event> fetchAllFromCategory(String category) {
+    public List<DTOEvent> fetchAllFromCategory(String category) {
         final String JDBC_DRIVER = "org.h2.Driver";
         final String DB_URL = "jdbc:h2:./resources/testRadar";
 
@@ -57,7 +55,7 @@ public class H2Event {
         PreparedStatement stmt = null;
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        List<Event> allEvents = new ArrayList<>();
+        List<DTOEvent> allDTOEvents = new ArrayList<>();
 
         try {
             Class.forName(JDBC_DRIVER);
@@ -78,7 +76,7 @@ public class H2Event {
             LocalDateTime dateTime;
             while (rs.next()) {
                 dateTime = LocalDateTime.parse(rs.getString(1), formatter);
-                allEvents.add(new Event(Integer.valueOf(rs.getString(2)), dateTime));
+                allDTOEvents.add(new DTOEvent(Integer.valueOf(rs.getString(2)), dateTime));
             }
             stmt.close();
             conn.close();
@@ -89,7 +87,7 @@ public class H2Event {
             System.err.println("Error during SQL query");
             e.printStackTrace();
         }
-        return allEvents;
+        return allDTOEvents;
     }
 
 }

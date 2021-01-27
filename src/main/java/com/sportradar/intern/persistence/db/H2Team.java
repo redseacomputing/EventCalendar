@@ -1,6 +1,6 @@
 package com.sportradar.intern.persistence.db;
 
-import com.sportradar.intern.dto.Team;
+import com.sportradar.intern.dto.DTOTeam;
 
 import java.sql.*;
 import java.time.format.DateTimeFormatter;
@@ -9,7 +9,7 @@ import java.util.List;
 
 public class H2Team {
 
-    public List<Team> fetchTeamNamesFrom(int eventID) {
+    public List<DTOTeam> fetchTeamNamesFrom(int eventID) {
         final String JDBC_DRIVER = "org.h2.Driver";
         final String DB_URL = "jdbc:h2:./resources/testRadar";
 
@@ -18,7 +18,7 @@ public class H2Team {
         Connection conn = null;
         PreparedStatement stmt = null;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        List<Team> allTeamsOfEvent = new ArrayList<>();
+        List<DTOTeam> allTeamsOfEvent = new ArrayList<>();
         try {
             Class.forName(JDBC_DRIVER);
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
@@ -31,10 +31,10 @@ public class H2Team {
             );
             stmt.setInt(1, eventID);
             ResultSet rs = stmt.executeQuery();
-            Team team;
+            DTOTeam DTOTeam;
             while (rs.next()) {
-                team = new Team(rs.getString(1));
-                allTeamsOfEvent.add(team);
+                DTOTeam = new DTOTeam(rs.getString(1));
+                allTeamsOfEvent.add(DTOTeam);
             }
 
             stmt.close();
