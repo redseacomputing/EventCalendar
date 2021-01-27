@@ -1,14 +1,14 @@
 package com.sportradar.intern.dto;
 
-public class Team {
+public class DTOTeam {
 
     private String teamName;
 
-    public Team(String name) {
+    public DTOTeam(String name) {
         this.teamName = name;
     }
 
-    public Team() {
+    public DTOTeam() {
     }
 
     public String getTeamName() {
@@ -21,7 +21,7 @@ public class Team {
 
     @Override
     public String toString() {
-        return "Team{" +
+        return "DTOTeam{" +
                 "name='" + teamName + '\'' +
                 '}';
     }

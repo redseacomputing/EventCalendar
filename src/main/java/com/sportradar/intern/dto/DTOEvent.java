@@ -3,29 +3,29 @@ package com.sportradar.intern.dto;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class Event {
+public class DTOEvent {
     private int id;
     private LocalDateTime dateOfEvent;
     private String category;
-    private Team[] team;
-    private List<Team> teams;
+    private DTOTeam[] DTOTeam;
+    private List<DTOTeam> DTOTeams;
 
-    public Event() {
+    public DTOEvent() {
     }
 
-    public Event(int id, LocalDateTime dateOfEvent) {
+    public DTOEvent(int id, LocalDateTime dateOfEvent) {
         this.id = id;
         this.dateOfEvent = dateOfEvent;
     }
 
-    public Event(LocalDateTime dateOfEvent, Team[] team) {
+    public DTOEvent(LocalDateTime dateOfEvent, DTOTeam[] DTOTeam) {
         this.dateOfEvent = dateOfEvent;
-        this.team = team;
+        this.DTOTeam = DTOTeam;
     }
 
-    public Event(LocalDateTime dateOfEvent, Team[] team, String category) {
+    public DTOEvent(LocalDateTime dateOfEvent, DTOTeam[] DTOTeam, String category) {
         this.dateOfEvent = dateOfEvent;
-        this.team = team;
+        this.DTOTeam = DTOTeam;
         this.category = category;
     }
 
@@ -37,12 +37,12 @@ public class Event {
         this.id = id;
     }
 
-    public List<Team> getTeams() {
-        return teams;
+    public List<DTOTeam> getTeams() {
+        return DTOTeams;
     }
 
-    public void setTeams(List<Team> teams) {
-        this.teams = teams;
+    public void setTeams(List<DTOTeam> DTOTeams) {
+        this.DTOTeams = DTOTeams;
     }
 
     public String getCategory() {
@@ -61,19 +61,19 @@ public class Event {
         this.dateOfEvent = dateOfEvent;
     }
 
-    public Team[] getTeam() {
-        return team;
+    public DTOTeam[] getTeam() {
+        return DTOTeam;
     }
 
-    public void setTeam(Team[] team) {
-        this.team = team;
+    public void setTeam(DTOTeam[] DTOTeam) {
+        this.DTOTeam = DTOTeam;
     }
 
     @Override
     public String toString() {
-        return "Event{" +
+        return "DTOEvent{" +
                 "time=" + dateOfEvent +
-                ", team=" + team +
+                ", DTOTeam=" + DTOTeam +
                 '}';
     }
 }

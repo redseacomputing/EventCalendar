@@ -1,6 +1,7 @@
 package com.sportradar.intern.rest;
 
-import com.sportradar.intern.dto.Event;
+import com.sportradar.intern.domain.Event;
+import com.sportradar.intern.dto.DTOEvent;
 import com.sportradar.intern.service.AllSportsService;
 
 import javax.ws.rs.*;
