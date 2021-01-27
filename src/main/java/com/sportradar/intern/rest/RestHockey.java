@@ -1,7 +1,6 @@
 package com.sportradar.intern.rest;
 
 import com.sportradar.intern.dto.Event;
-import com.sportradar.intern.persistence.db.H2Hockey;
 import com.sportradar.intern.service.HockeyService;
 
 import javax.ws.rs.GET;
