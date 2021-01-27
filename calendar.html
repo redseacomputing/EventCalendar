@@ -39,6 +39,7 @@
 <table class="table table-striped">
     <tr class="bg-info">
         <th>Datum</th>
+        <th>Uhrzeit</th>
         <th>Kategorie</th>
         <th>Team</th>
         <th>Team</th>
@@ -76,9 +77,10 @@
 
             var row = `<tr>
              				<td>${data[i].dateOfEvent}</td>
+             				<td>${data[i].timeOfEvent}</td>
              				<td>${data[i].category}</td>
-             				<td>${data[i].DTOTeams[0].teamName}</td>
-             				<td>${data[i].DTOTeams[1].teamName}</td>
+             				<td>${data[i].teams[0].teamName}</td>
+             				<td>${data[i].teams[1].teamName}</td>
              		  </tr>`
             table.innerHTML += row
         }
